@@ -167,6 +167,8 @@
   .footer-link a { color: var(--brown-muted); text-decoration: none; }
   .footer-link a:hover { color: var(--brown); }
 
+  /* ── MD files download ── */
+
   /* ── Responsive ── */
   @media (max-width: 600px) {
     .hero { padding: 48px 20px 40px; }
@@ -298,5 +300,23 @@
   </div>
 </footer>
 
+<script>
+document.querySelectorAll('.card-files a[href$=".md"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    var href = this.getAttribute('href');
+    fetch(href).then(function(r) { return r.blob(); }).then(function(b) {
+      var url = URL.createObjectURL(b);
+      var tmp = document.createElement('a');
+      tmp.href = url;
+      tmp.download = href.split('/').pop();
+      document.body.appendChild(tmp);
+      tmp.click();
+      document.body.removeChild(tmp);
+      URL.revokeObjectURL(url);
+    });
+  });
+});
+</script>
 </body>
 </html>
