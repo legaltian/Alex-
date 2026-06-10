@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alex 技能库</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+  .hero { text-align: center; padding: 60px 20px 40px; background: linear-gradient(135deg, #1e293b, #0f172a); }
+  .hero h1 { font-size: 2.5em; background: linear-gradient(135deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { color: #94a3b8; margin-top: 10px; font-size: 1.1em; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 24px; padding: 40px; max-width: 1200px; margin: 0 auto; }
+  .card { background: #1e293b; border-radius: 16px; padding: 28px; border: 1px solid #334155; transition: transform .2s, box-shadow .2s; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.4); border-color: #38bdf8; }
+  .card .icon { font-size: 2em; margin-bottom: 12px; }
+  .card h2 { font-size: 1.3em; margin-bottom: 4px; }
+  .card .cmd { color: #38bdf8; font-family: "SF Mono", Menlo, monospace; font-size: .85em; margin-bottom: 12px; }
+  .card .desc { color: #94a3b8; font-size: .9em; line-height: 1.6; margin-bottom: 16px; }
+  .card .meta { font-size: .8em; color: #64748b; }
+  .card .meta a { color: #818cf8; text-decoration: none; }
+  .card .meta a:hover { text-decoration: underline; }
+  .card .tag { display: inline-block; background: #334155; color: #94a3b8; padding: 2px 8px; border-radius: 6px; font-size: .75em; margin: 2px; }
+  footer { text-align: center; padding: 40px; color: #475569; font-size: .85em; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Alex 技能库</h1>
+  <p>Claude Code 自定义技能 · 法律研究自动化工具集</p>
+</div>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="icon">📄</div>
+    <h2>微信公众号文章抓取</h2>
+    <div class="cmd">/alex-wechat-saver</div>
+    <div class="desc">
+      丢一个微信公众号链接 → curl 抓取 → 提取标题/作者/公众号/日期/正文 →
+      保存为干净 Markdown。<br>
+      文件名：<code>YYYYMMDD-作者-公众号-标题.md</code>
+    </div>
+    <div class="meta">
+      <span class="tag">curl</span> <span class="tag">Python</span> <span class="tag">零依赖</span><br>
+      源文件：<a href="file:///Users/zhangtian/.claude/skills/alex-wechat-saver/SKILL.md">SKILL.md</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon">📊</div>
+    <h2>公众号文章分类汇总</h2>
+    <div class="cmd">/alex-wechat-classifier</div>
+    <div class="desc">
+      按关键词扫描公众号文章 → 归入子文件夹 → 生成格式化 Excel 汇总表。<br>
+      续存自动合并，同链接去重。黑体表头 + 宋体数据 + 全居中。
+    </div>
+    <div class="meta">
+      <span class="tag">Python</span> <span class="tag">openpyxl</span><br>
+      源文件：<a href="file:///Users/zhangtian/.claude/skills/alex-wechat-classifier/SKILL.md">SKILL.md</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon">⚖️</div>
+    <h2>北大法宝判例下载</h2>
+    <div class="cmd">/alex-pkulaw-downloader</div>
+    <div class="desc">
+      支持 URL / 案号 / HTML 文件三种输入。<br>
+      CDP 连接用户 Chrome → 过 WAF → 抓取完整判决书 →
+      提取元数据 + 裁判规则 + 12 章节判决全文。<br>
+      <strong>需 Chrome 调试模式。</strong>
+    </div>
+    <div class="meta">
+      <span class="tag">Playwright</span> <span class="tag">CDP</span> <span class="tag">Python</span><br>
+      源文件：<a href="file:///Users/zhangtian/.claude/skills/alex-pkulaw-downloader/SKILL.md">SKILL.md</a> ·
+      <a href="file:///Users/zhangtian/.claude/skills/alex-pkulaw-downloader/extract.py">extract.py</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon">📁</div>
+    <h2>裁判文书批量整理</h2>
+    <div class="cmd">/alex-case-analysis</div>
+    <div class="desc">
+      扫描 PDF 目录 → MinerU 转 Markdown → 提取案号/法院/当事人/争议焦点/本院认为 →
+      生成格式化 Excel（两个 Sheet）。宋体/黑体，全居中，按日期排序。
+    </div>
+    <div class="meta">
+      <span class="tag">MinerU API</span> <span class="tag">Python</span> <span class="tag">openpyxl</span><br>
+      源文件：<a href="file:///Users/zhangtian/.claude/skills/alex-case-analysis/SKILL.md">SKILL.md</a> ·
+      <a href="file:///Users/zhangtian/.claude/skills/alex-case-analysis/scripts/build_excel.py">build_excel.py</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Claude Code Skills · Alex · 2026
+</footer>
+
+</body>
+</html>
